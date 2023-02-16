@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Space {
+public class Person {
     @Id
-    private Long spaceId;
+    private Long personId;
 }
