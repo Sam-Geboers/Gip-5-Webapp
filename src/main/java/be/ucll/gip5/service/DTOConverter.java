@@ -9,6 +9,7 @@ public class DTOConverter {
     /***Device***/
     public Device DeviceDTOToEntity(DeviceDTO dto){
         Device device = new Device();
+        device.setName(dto.getName());
         return device;
     }
     public DeviceDTO DeviceEntityToDTO(Device device){
@@ -19,6 +20,10 @@ public class DTOConverter {
     /***DeviceInfo***/
     public DeviceInfo DeviceInfoDTOToEntity(DeviceInfoDTO dto){
         DeviceInfo info = new DeviceInfo();
+        info.setConsumption(dto.getConsumption());
+        info.setDeviceStatus(dto.isDeviceStatus());
+        info.setDeviceInformation(dto.getDeviceInformation());
+        info.setTypeOfDevice(dto.getTypeOfDevice());
         return info;
     }
     public DeviceInfoDTO DeviceEntityToDTO(DeviceInfo info){
@@ -32,6 +37,8 @@ public class DTOConverter {
     /***House***/
     public House HouseDTOToEntity(HouseDTO dto){
         House house = new House();
+        house.setName(dto.getName());
+        house.setAddress(dto.getAddress());
         return house;
     }
     public HouseDTO HouseEntityToDTO(House house){
@@ -43,6 +50,10 @@ public class DTOConverter {
     /***Person***/
     public Person PersonDTOToEntity(PersonDTO dto){
         Person person = new Person();
+        person.setRole(dto.getRole());
+        person.setEmail(dto.getEmail());
+        person.setUsername(dto.getUsername());
+        person.setPassword(dto.getPassword());
         return person;
     }
     public PersonDTO PersonEntityToDTO(Person person){
@@ -56,6 +67,8 @@ public class DTOConverter {
     /***Space***/
     public Space SpaceDTOToEntity(SpaceDTO dto){
         Space space = new Space();
+        space.setName(dto.getName());
+        space.setDescription(dto.getDescription());
         return space;
     }
     public SpaceDTO SpaceEntityToDTO(Space space){
