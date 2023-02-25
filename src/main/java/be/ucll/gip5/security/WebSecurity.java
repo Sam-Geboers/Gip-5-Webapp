@@ -17,10 +17,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity // Zorgt ervoor dat jouw configuratie voorrang heeft op de default manier!
 //@EnableGlobalMethodSecurity(
 //        prePostEnabled = false, securedEnabled = false, jsr250Enabled = true)
-
 public class WebSecurity {
     @Autowired
     private JwtTokenFilter jwtTokenFilter;
+
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
@@ -36,18 +36,22 @@ public class WebSecurity {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http // disabling csrf since we won't use form login
-//                .csrf().disable()
+        http // disabling csrf since we won't use form login
+                .csrf().disable()
                 // giving every permission to every request for /login endpoint
-//                .authorizeRequests().antMatchers("/",
-//                        "/login",
-//                        "/login/register",
-//                        "/Spot").permitAll()
+                .authorizeRequests().antMatchers("/",
+                        "/login/**",
+                        "/swagger-resources/**",
+                        "/swagger-ui.html",
+                        "/v3/api-docs",
+                        "/webjars/**",
+                        "/swagger-ui/",
+                        "/swagger-ui/**").permitAll()
                 // for everything else, the user has to be authenticated
-//                .anyRequest().authenticated()
+                .anyRequest().authenticated()
                 // setting stateless session, because we choose to implement Rest API
-//                .and().sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         // adding the custom filter before UsernamePasswordAuthenticationFilter in the filter chain
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
