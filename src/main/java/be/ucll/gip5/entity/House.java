@@ -3,29 +3,30 @@ package be.ucll.gip5.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
 
 @Entity
-public class Space {
+public class House {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    private Long spaceId;
+    private Long houseId;
+    @Getter
+    @Setter
+    private String address;
     @Getter
     @Setter
     private String name;
-    @Getter
-    @Setter
-    private String description;
 
     @Getter
     @Setter
-    @ManyToOne
-    private House house;
+    @ManyToMany
+    private List<Person> personList;
 
     @Getter
     @Setter
-    @OneToMany(mappedBy = "space")
-    private List<Device> deviceList;
+    @OneToMany(mappedBy = "house")
+    private List<Space> spaceList;
 }
