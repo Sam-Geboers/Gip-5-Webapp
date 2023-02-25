@@ -1,22 +1,27 @@
 package be.ucll.gip5.entity;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-public class Device {
+public class DeviceInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    private Long deviceId;
+    private long deviceInfoId;
     @Getter
     @Setter
-    private String name;
+    private boolean deviceStatus;
     @Getter
     @Setter
-    private String type;
+    private String consumption;
+    @Getter
+    @Setter
+    private String typeOfDevice;
+    @Getter
+    @Setter
+    private String deviceInformation;
+
 }
