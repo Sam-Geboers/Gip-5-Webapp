@@ -64,6 +64,13 @@ public class DTOConverter {
         dto.setUsername(person.getUsername());
         return dto;
     }
+    public Person PersonEntityToEntity(Person person, PersonDTO dto){
+        person.setPassword(dto.getPassword());
+        person.setRole(dto.getRole());
+        person.setEmail(dto.getEmail());
+        person.setUsername(dto.getUsername());
+        return person;
+    }
     /***Space***/
     public Space SpaceDTOToEntity(SpaceDTO dto){
         Space space = new Space();
