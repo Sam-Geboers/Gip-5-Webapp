@@ -47,6 +47,13 @@ public class DTOConverter {
         dto.setAddress(house.getAddress());
         return dto;
     }
+
+    public House HouseEntityToEntity(House house, HouseDTO dto){
+        house.setName(dto.getName());
+        house.setAddress(dto.getAddress());
+        return house;
+    }
+
     /***Person***/
     public Person PersonDTOToEntity(PersonDTO dto){
         Person person = new Person();
@@ -83,5 +90,11 @@ public class DTOConverter {
         dto.setName(space.getName());
         dto.setDescription(space.getDescription());
         return dto;
+    }
+
+    public Space SpaceEntityToEntity(Space space, SpaceDTO dto){
+        space.setName(dto.getName());
+        space.setDescription(dto.getDescription());
+        return space;
     }
 }
