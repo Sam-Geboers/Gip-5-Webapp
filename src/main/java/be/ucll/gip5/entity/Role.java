@@ -7,25 +7,18 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class House {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    private Long houseId;
+    private Long roleId;
     @Getter
     @Setter
-    private String address;
-    @Getter
-    @Setter
-    private String name;
+    private String roleName;
 
     @Getter
     @Setter
-    @ManyToMany
+    @OneToMany(mappedBy = "role")
     private List<User> userList;
 
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "house")
-    private List<Space> spaceList;
 }

@@ -7,14 +7,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Person {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long personId;
-    @Getter
-    @Setter
-    private String role;
     @Getter
     @Setter
     private String username;
@@ -29,4 +26,9 @@ public class Person {
     @Setter
     @ManyToMany(mappedBy = "personList")
     private List<House> houseList;
+
+    @Getter
+    @Setter
+    @ManyToOne
+    private Role role;
 }

@@ -1,7 +1,6 @@
 package be.ucll.gip5.security;
 
-import be.ucll.gip5.dto.PersonDTO;
-import be.ucll.gip5.entity.Person;
+import be.ucll.gip5.entity.User;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -17,11 +16,11 @@ public class JwtUtil {
     @Value("${jwt.token.secret}")
     private String secret;
 
-    public String generate(Person person) {
+    public String generate(User user) {
         return Jwts.builder()
-                .setSubject(person.getEmail())
+                .setSubject(user.getEmail())
                 .setIssuer("admin")
-                .claim("roles", person.getRole())
+                .claim("roles", user.getRole())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expireTimeInMinutes))
                 .signWith(SignatureAlgorithm.HS512, Keys.hmacShaKeyFor(secret.getBytes()))

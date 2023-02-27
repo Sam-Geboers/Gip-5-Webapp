@@ -55,28 +55,25 @@ public class DTOConverter {
     }
 
     /***Person***/
-    public Person PersonDTOToEntity(PersonDTO dto){
-        Person person = new Person();
-        person.setRole(dto.getRole());
-        person.setEmail(dto.getEmail());
-        person.setUsername(dto.getUsername());
-        person.setPassword(dto.getPassword());
-        return person;
+    public User UserDTOToEntity(UserDTO dto){
+        User user = new User();
+        user.setEmail(dto.getEmail());
+        user.setUsername(dto.getUsername());
+        user.setPassword(dto.getPassword());
+        return user;
     }
-    public PersonDTO PersonEntityToDTO(Person person){
-        PersonDTO dto = new PersonDTO();
-        dto.setEmail(person.getEmail());
-        dto.setRole(person.getRole());
-        dto.setPassword(person.getPassword());
-        dto.setUsername(person.getUsername());
+    public UserDTO UserEntityToDTO(User user){
+        UserDTO dto = new UserDTO();
+        dto.setEmail(user.getEmail());
+        dto.setPassword(user.getPassword());
+        dto.setUsername(user.getUsername());
         return dto;
     }
-    public Person PersonEntityToEntity(Person person, PersonDTO dto){
-        person.setPassword(dto.getPassword());
-        person.setRole(dto.getRole());
-        person.setEmail(dto.getEmail());
-        person.setUsername(dto.getUsername());
-        return person;
+    public User UserEntityToEntity(User user, UserDTO dto){
+        user.setPassword(dto.getPassword());
+        user.setEmail(dto.getEmail());
+        user.setUsername(dto.getUsername());
+        return user;
     }
     /***Space***/
     public Space SpaceDTOToEntity(SpaceDTO dto){

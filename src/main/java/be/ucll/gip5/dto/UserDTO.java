@@ -3,10 +3,7 @@ package be.ucll.gip5.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-public class PersonDTO {
-    @Getter
-    @Setter
-    private String role;
+public class UserDTO {
     @Getter
     @Setter
     private String username;
