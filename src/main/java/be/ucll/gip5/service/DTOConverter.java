@@ -26,13 +26,20 @@ public class DTOConverter {
         info.setTypeOfDevice(dto.getTypeOfDevice());
         return info;
     }
-    public DeviceInfoDTO DeviceEntityToDTO(DeviceInfo info){
+    public DeviceInfoDTO DeviceInfoEntityToDTO(DeviceInfo info){
         DeviceInfoDTO dto = new DeviceInfoDTO();
         dto.setConsumption(info.getConsumption());
         dto.setDeviceStatus(info.isDeviceStatus());
         dto.setDeviceInformation(info.getDeviceInformation());
         dto.setTypeOfDevice(info.getTypeOfDevice());
         return dto;
+    }
+    public DeviceInfo DeviceInfoEntityToEntity(DeviceInfo info, DeviceInfoDTO dto){
+        info.setTypeOfDevice(dto.getTypeOfDevice());
+        info.setConsumption(dto.getConsumption());
+        info.setDeviceStatus(dto.isDeviceStatus());
+        info.setDeviceInformation(dto.getDeviceInformation());
+        return info;
     }
     /***House***/
     public House HouseDTOToEntity(HouseDTO dto){

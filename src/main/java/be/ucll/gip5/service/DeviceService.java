@@ -6,10 +6,15 @@ import be.ucll.gip5.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class DeviceService {
     @Autowired
     private DeviceRepository deviceRepository;
+    @Autowired
+    private DTOConverter dtoConverter;
 
     public void addDevice(DeviceDTO deviceDTO){
 
@@ -35,17 +40,21 @@ public class DeviceService {
         }
     }
 
-    public void getDevice(Long id) throws Exception{
+    public DeviceDTO getDevice(Long id) throws Exception{
         Device device = deviceRepository.findAllByDeviceId(id);
         if (device != null) {
-
+            return dtoConverter.DeviceEntityToDTO(device);
         }else {
             throw new ClassNotFoundException("Device not found");
         }
     }
 
-    public void getALlDevices(){
-//        List<Device> devices = deviceRepository.findAll();
-
+    public List<DeviceDTO> getALlDevices(){
+        List<Device> deviceList = deviceRepository.findAll();
+        List<DeviceDTO> deviceDTOS = new ArrayList<>();
+        for (Device d:deviceList) {
+            deviceDTOS.add(dtoConverter.DeviceEntityToDTO(d));
+        }
+        return deviceDTOS;
     }
 }

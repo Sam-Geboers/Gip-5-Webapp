@@ -31,7 +31,7 @@ public class UserService {
             user = dtoConverter.UserEntityToEntity(user,dto);
             userRepository.save(user);
         }else {
-            throw new ClassNotFoundException("Person not Found");
+            throw new ClassNotFoundException("Person not found");
         }
     }
     public void deleteUserById(Long id) throws Exception{
@@ -39,7 +39,7 @@ public class UserService {
         if (user != null){
             userRepository.delete(user);
         }else {
-            throw new ClassNotFoundException("Person not Found");
+            throw new ClassNotFoundException("Person not found");
         }
     }
     public List<UserDTO> getAllUsers(){
