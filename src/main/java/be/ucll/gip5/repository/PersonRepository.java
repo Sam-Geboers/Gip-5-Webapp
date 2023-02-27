@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface PersonRepository extends CrudRepository<Person,Long> {
     Person getAccountByUsername(String username);
-    Person findAllById(Long id);
+    Person findAllByPersonId(Long id);
     List<Person> findAll();
 }
 

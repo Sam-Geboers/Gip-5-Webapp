@@ -6,8 +6,6 @@ import be.ucll.gip5.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class DeviceService {
     @Autowired
@@ -18,7 +16,7 @@ public class DeviceService {
     }
 
     public void editDevice(Long id, DeviceDTO deviceDTO) throws Exception{
-        Device device = deviceRepository.findAllById(id);
+        Device device = deviceRepository.findAllByDeviceId(id);
         if (device != null) {
             device.setName(deviceDTO.getName());
 //            device.setSpace(deviceDTO.getSpace);
@@ -29,7 +27,7 @@ public class DeviceService {
     }
 
     public void deleteDevice(Long id) throws Exception{
-        Device device = deviceRepository.findAllById(id);
+        Device device = deviceRepository.findAllByDeviceId(id);
         if (device != null) {
             deviceRepository.delete(device);
         }else {
@@ -38,7 +36,7 @@ public class DeviceService {
     }
 
     public void getDevice(Long id) throws Exception{
-        Device device = deviceRepository.findAllById(id);
+        Device device = deviceRepository.findAllByDeviceId(id);
         if (device != null) {
 
         }else {

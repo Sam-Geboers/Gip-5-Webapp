@@ -1,7 +1,7 @@
 package be.ucll.gip5.service;
+
 import be.ucll.gip5.dto.HouseDTO;
 import be.ucll.gip5.entity.House;
-import be.ucll.gip5.entity.Person;
 import be.ucll.gip5.repository.HouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class HouseService {
     }
 
     public void editHouse(HouseDTO dto, Long id) throws Exception{
-        House house = houseRepository.findAllById(id);
+        House house = houseRepository.findAllByHouseId(id);
         if (house != null){
             house = dtoConverter.HouseEntityToEntity(house, dto);
             houseRepository.save(house);
@@ -33,7 +33,7 @@ public class HouseService {
     }
 
     public void deleteHouseById(Long id) throws Exception{
-        House house = houseRepository.findAllById(id);
+        House house = houseRepository.findAllByHouseId(id);
         if (house != null) {
             houseRepository.delete(house);
         } else {

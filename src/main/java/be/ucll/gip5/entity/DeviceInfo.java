@@ -1,15 +1,16 @@
 package be.ucll.gip5.entity;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
 public class DeviceInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    private long InfoId;
+    private long deviceInfoId;
     @Getter
     @Setter
     private boolean deviceStatus;

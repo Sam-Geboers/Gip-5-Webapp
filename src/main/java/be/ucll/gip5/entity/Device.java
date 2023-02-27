@@ -1,8 +1,9 @@
 package be.ucll.gip5.entity;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
 public class Device {
@@ -21,6 +22,7 @@ public class Device {
 
     @Getter
     @Setter
-    @OneToOne(mappedBy = "device")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "deviceInfo_id")
     private DeviceInfo deviceInfo;
 }

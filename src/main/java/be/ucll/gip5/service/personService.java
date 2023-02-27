@@ -21,7 +21,7 @@ public class personService {
         personRepository.save(person);
     }
     public void editPerson(PersonDTO dto, Long id) throws Exception{
-        Person person = personRepository.findAllById(id);
+        Person person = personRepository.findAllByPersonId(id);
         if (person != null){
             person = dtoConverter.PersonEntityToEntity(person,dto);
             personRepository.save(person);
@@ -30,7 +30,7 @@ public class personService {
         }
     }
     public void deletePersonById(Long id) throws Exception{
-        Person person = personRepository.findAllById(id);
+        Person person = personRepository.findAllByPersonId(id);
         if (person != null){
             personRepository.delete(person);
         }else {
@@ -46,7 +46,7 @@ public class personService {
         return personDTOS;
     }
     public PersonDTO getPersonById(Long id) throws Exception{
-        Person person = personRepository.findAllById(id);
+        Person person = personRepository.findAllByPersonId(id);
         if (person != null){
             return dtoConverter.PersonEntityToDTO(person);
         }else {

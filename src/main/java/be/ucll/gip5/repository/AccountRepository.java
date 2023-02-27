@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface AccountRepository extends CrudRepository<Person, Long> {
-
-    Person findAllById(Long id);
+    Person getAccountByUsername(String username);
+//    Person findAllByAccountId(Long id);
     List<Person> findAll();
 }

@@ -1,10 +1,9 @@
 package be.ucll.gip5.entity;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.w3c.dom.stylesheets.LinkStyle;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
