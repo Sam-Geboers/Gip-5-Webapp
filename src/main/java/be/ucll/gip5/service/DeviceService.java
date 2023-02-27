@@ -2,6 +2,7 @@ package be.ucll.gip5.service;
 
 import be.ucll.gip5.dto.DeviceDTO;
 import be.ucll.gip5.entity.Device;
+import be.ucll.gip5.entity.House;
 import be.ucll.gip5.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ public class DeviceService {
     private DTOConverter dtoConverter;
 
     public void addDevice(DeviceDTO deviceDTO){
-
+        Device device = dtoConverter.DeviceDTOToEntity(deviceDTO);
+        deviceRepository.save(device);
     }
 
     public void editDevice(Long id, DeviceDTO deviceDTO) throws Exception{

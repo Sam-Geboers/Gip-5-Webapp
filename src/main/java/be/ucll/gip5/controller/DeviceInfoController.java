@@ -1,9 +1,8 @@
 package be.ucll.gip5.controller;
 
-import be.ucll.gip5.dto.DeviceDTO;
-import be.ucll.gip5.dto.HouseDTO;
+import be.ucll.gip5.dto.DeviceInfoDTO;
 import be.ucll.gip5.dto.UserDTO;
-import be.ucll.gip5.service.UserService;
+import be.ucll.gip5.service.DeviceInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,17 +11,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("user")
-public class UserController {
+@RequestMapping("deviceInfo")
+public class DeviceInfoController {
 
     @Autowired
-    private UserService userService;
+    private DeviceInfoService deviceInfoService;
 
     @PostMapping
-    public ResponseEntity addUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity addDeviceInfo(@RequestBody DeviceInfoDTO dto){
         try{
-            userService.addUser(userDTO);
-            return new ResponseEntity("User successfully created", HttpStatus.CREATED);
+            deviceInfoService.addDeviceInfo(dto);
+            return new ResponseEntity("DeviceInfo successfully created", HttpStatus.CREATED);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
@@ -30,10 +29,10 @@ public class UserController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity editUserById(@PathVariable Long id, @RequestBody UserDTO userDTO){
+    public ResponseEntity editDeviceInfoById(@PathVariable Long id, @RequestBody DeviceInfoDTO deviceInfoDTO){
         try {
-            userService.editUser(userDTO, id);
-            return new ResponseEntity("User was successfully edited", HttpStatus.OK);
+            deviceInfoService.editDeviceInfo(deviceInfoDTO, id);
+            return new ResponseEntity("DeviceInfo was successfully edited", HttpStatus.OK);
         }
         catch (ClassNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -45,10 +44,10 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
-    public  ResponseEntity deleteUserById(@PathVariable Long id){
+    public  ResponseEntity deleteDeviceInfoById(@PathVariable Long id){
         try {
-            userService.deleteUserById(id);
-            return new ResponseEntity("User was successfully deleted", HttpStatus.OK);
+            deviceInfoService.deleteDeviceInfo(id);
+            return new ResponseEntity("DeviceInfo was successfully deleted", HttpStatus.OK);
         }
         catch (ClassNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -60,10 +59,10 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity getUserById(@PathVariable Long id){
+    public ResponseEntity getDeviceInfoById(@PathVariable Long id){
         try {
-            UserDTO userDTO = userService.getUserById(id);
-            return new ResponseEntity<>(userDTO, HttpStatus.OK);
+            DeviceInfoDTO deviceInfoDTO = deviceInfoService.getDeviceInfoById(id);
+            return new ResponseEntity<>(deviceInfoDTO, HttpStatus.OK);
         }catch (ClassNotFoundException e){
             e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -74,10 +73,10 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity getAllUsers(){
+    public ResponseEntity getAllDeviceInfo(){
         try {
-            List<UserDTO> userDTOSList = userService.getAllUsers();
-            return new ResponseEntity<>(userDTOSList, HttpStatus.OK);
+            List<DeviceInfoDTO> deviceInfoDTOS = deviceInfoService.getAllDeviceInfo();
+            return new ResponseEntity<>(deviceInfoDTOS, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);

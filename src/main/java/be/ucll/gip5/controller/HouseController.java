@@ -59,7 +59,7 @@ public class HouseController {
     }
 
     @GetMapping
-    public ResponseEntity getAllPersons(){
+    public ResponseEntity getAllHouses(){
         try {
             List<HouseDTO> houseDTOList = houseService.getAllHouses();
             return new ResponseEntity<>(houseDTOList, HttpStatus.OK);
@@ -68,7 +68,4 @@ public class HouseController {
             return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
         }
     }
-
-
-
 }
