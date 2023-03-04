@@ -1,34 +1,30 @@
 package be.ucll.gip5.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
-
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    private Long personId;
-    @Getter
-    @Setter
+    private Long userId;
     private String username;
-    @Getter
-    @Setter
     private String email;
-    @Getter
-    @Setter
     private String password;
+    private String roles;
 
-    @Getter
-    @Setter
-    @ManyToMany(mappedBy = "personList")
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
+
+    @ManyToMany(mappedBy = "userList")
     private List<House> houseList;
-
-    @Getter
-    @Setter
-    @ManyToOne
-    private Role role;
 }

@@ -1,31 +1,25 @@
 package be.ucll.gip5.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class House {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
     private Long houseId;
-    @Getter
-    @Setter
     private String address;
-    @Getter
-    @Setter
     private String name;
 
-    @Getter
-    @Setter
     @ManyToMany
     private List<User> userList;
 
-    @Getter
-    @Setter
     @OneToMany(mappedBy = "house")
     private List<Space> spaceList;
 }

@@ -3,8 +3,8 @@ package be.ucll.gip5.service;
 import be.ucll.gip5.dto.UserDTO;
 import be.ucll.gip5.entity.User;
 import be.ucll.gip5.repository.UserRepository;
-import be.ucll.gip5.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,17 +16,19 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
+    private DTOConverter dtoConverter;
 
     @Autowired
-    private DTOConverter dtoConverter;
+    private PasswordEncoder passwordEncoder;
 
     public void addUser(UserDTO dto){
         User user = dtoConverter.UserDTOToEntity(dto);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (user.getRoles().isEmpty()) user.setRoles("USER");
         userRepository.save(user);
     }
     public void editUser(UserDTO dto, Long id) throws Exception{
-        User user = userRepository.findAllByPersonId(id);
+        User user = userRepository.findAllByUserId(id);
         if (user != null){
             user = dtoConverter.UserEntityToEntity(user,dto);
             userRepository.save(user);
@@ -35,7 +37,7 @@ public class UserService {
         }
     }
     public void deleteUserById(Long id) throws Exception{
-        User user = userRepository.findAllByPersonId(id);
+        User user = userRepository.findAllByUserId(id);
         if (user != null){
             userRepository.delete(user);
         }else {
@@ -51,7 +53,7 @@ public class UserService {
         return userDTOS;
     }
     public UserDTO getUserById(Long id) throws Exception{
-        User user = userRepository.findAllByPersonId(id);
+        User user = userRepository.findAllByUserId(id);
         if (user != null){
             return dtoConverter.UserEntityToDTO(user);
         }else {

@@ -67,6 +67,7 @@ public class DTOConverter {
         user.setEmail(dto.getEmail());
         user.setUsername(dto.getUsername());
         user.setPassword(dto.getPassword());
+        user.setRoles(dto.getRole());
         return user;
     }
     public UserDTO UserEntityToDTO(User user){
@@ -74,12 +75,14 @@ public class DTOConverter {
         dto.setEmail(user.getEmail());
         dto.setPassword(user.getPassword());
         dto.setUsername(user.getUsername());
+        dto.setRole(user.getRoles());
         return dto;
     }
     public User UserEntityToEntity(User user, UserDTO dto){
         user.setPassword(dto.getPassword());
         user.setEmail(dto.getEmail());
         user.setUsername(dto.getUsername());
+        user.setRoles(dto.getRole());
         return user;
     }
     /***Space***/
