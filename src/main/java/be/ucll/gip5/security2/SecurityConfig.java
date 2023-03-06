@@ -12,13 +12,23 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
     //endpoints Create, Delete, (update)
-    private static final String[] SECURED_URLS = {"/spaces/**"};
+    private static final String[] SECURED_URLS = {"/spaces/**",
+                                                    "/users/**",
+                                                    "/houses/**",
+                                                    "/devices/**",
+                                                    "/devicesInfo/**"};
     //endpoints READ (update)
-    private static final String[] UNSECURED_URLS = {"/user/**",
+    private static final String[] UNSECURED_URLS = {"/spaces/get-space/{id}",
+                                                    "/spaces/get-spaces/",
+                                                    "/houses/get-houses/",
+                                                    "/devices/get-device/{id}",
+                                                    "/devices/get-devices/",
+                                                    "/devicesInfo/edit-device-info/{id}",
+                                                    "/devicesInfo/get-device-info/{id}",
                                                     "/swagger-ui/",
                                                     "/swagger-ui/**",
                                                     "/swagger-resources/**",
-                                                    "/spaces/get-space/{id}"};
+                                                    };
 
     @Bean
     public PasswordEncoder passwordEncoder(){
