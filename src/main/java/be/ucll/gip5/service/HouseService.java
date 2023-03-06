@@ -49,4 +49,14 @@ public class HouseService {
         }
         return houseDTOS;
     }
+
+    public HouseDTO getHouseById(Long id) throws Exception {
+        House house = houseRepository.findAllByHouseId(id);
+        if(house != null){
+            return dtoConverter.HouseEntityToDTO(house);
+        }else{
+            throw new ClassNotFoundException("House not found");
+        }
+
+    }
 }

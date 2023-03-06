@@ -5,6 +5,8 @@ import be.ucll.gip5.service.SpaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,6 +64,21 @@ public class SpaceController {
         try {
             List<SpaceDTO> spaceDTOList = spaceService.getAllSpaces();
             return new ResponseEntity<>(spaceDTOList, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity getSpaceById(@PathVariable Long id){
+        try{
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String name = auth.getPrincipal().toString();
+            System.out.println(name);
+
+            SpaceDTO dto = spaceService.getSpaceById(id);
+            return new ResponseEntity<>(dto,HttpStatus.FOUND);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);

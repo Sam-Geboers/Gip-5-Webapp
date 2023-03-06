@@ -48,4 +48,13 @@ public class SpaceService {
         }
         return spaceDTOS;
     }
+
+    public SpaceDTO getSpaceById(Long id) throws Exception {
+        Space space = spaceRepository.findAllBySpaceId(id);
+        if(space != null) {
+            return dtoConverter.SpaceEntityToDTO(space);
+        }else {
+            throw new ClassNotFoundException("Space not found");
+        }
+    }
 }
