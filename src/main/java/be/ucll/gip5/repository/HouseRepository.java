@@ -10,4 +10,6 @@ import java.util.List;
 public interface HouseRepository extends CrudRepository<House, Long> {
     House findAllByHouseId(Long id);
     List<House> findAll();
+
+    House findByName(String name);
 }

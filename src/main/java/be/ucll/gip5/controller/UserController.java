@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/add-user")
     public ResponseEntity addUser(@RequestBody UserDTO userDTO){
         try{
             userService.addUser(userDTO);
@@ -29,7 +29,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/edit-user/{id}")
     public ResponseEntity editUserById(@PathVariable Long id, @RequestBody UserDTO userDTO){
         try {
             userService.editUser(userDTO, id);
@@ -44,7 +44,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete-user/{id}")
     public  ResponseEntity deleteUserById(@PathVariable Long id){
         try {
             userService.deleteUserById(id);
@@ -59,28 +59,28 @@ public class UserController {
         }
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity getUserById(@PathVariable Long id){
-        try {
-            UserDTO userDTO = userService.getUserById(id);
-            return new ResponseEntity<>(userDTO, HttpStatus.OK);
-        }catch (ClassNotFoundException e){
-            e.printStackTrace();
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity(e, HttpStatus.NOT_FOUND);
-        }
-    }
+//    @GetMapping("{id}")
+//    public ResponseEntity getUserById(@PathVariable Long id){
+//        try {
+//            UserDTO userDTO = userService.getUserById(id);
+//            return new ResponseEntity<>(userDTO, HttpStatus.OK);
+//        }catch (ClassNotFoundException e){
+//            e.printStackTrace();
+//            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return new ResponseEntity(e, HttpStatus.NOT_FOUND);
+//        }
+//    }
 
-    @GetMapping
-    public ResponseEntity getAllUsers(){
-        try {
-            List<UserDTO> userDTOSList = userService.getAllUsers();
-            return new ResponseEntity<>(userDTOSList, HttpStatus.OK);
-        }catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
-        }
-    }
+//    @GetMapping
+//    public ResponseEntity getAllUsers(){
+//        try {
+//            List<UserDTO> userDTOSList = userService.getAllUsers();
+//            return new ResponseEntity<>(userDTOSList, HttpStatus.OK);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
+//        }
+//    }
 }

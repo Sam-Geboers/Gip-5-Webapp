@@ -12,9 +12,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
     //endpoints Create, Delete, (update)
-    private static final String[] SECURED_URLS = {"/api/v1/demo-controller/**"};
+    private static final String[] SECURED_URLS = {"/spaces/**"};
     //endpoints READ (update)
-    private static final String[] UNSECURED_URLS = {"/"};
+    private static final String[] UNSECURED_URLS = {"/user/**",
+                                                    "/swagger-ui/",
+                                                    "/swagger-ui/**",
+                                                    "/swagger-resources/**",
+                                                    "/spaces/get-space/{id}"};
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -30,7 +34,6 @@ public class SecurityConfig {
                 .permitAll().and()
                 .authorizeHttpRequests().antMatchers(SECURED_URLS)
                 .hasAuthority("ADMIN").anyRequest()
-                .authenticated().and().formLogin().and().build();
-
+                .authenticated().and().httpBasic().and().build();
     }
 }

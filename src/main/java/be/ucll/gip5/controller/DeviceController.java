@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("device")
+@RequestMapping("devices")
 public class DeviceController {
 
     @Autowired
     private DeviceService deviceService;
 
-    @PostMapping
+    @PostMapping("/add-device")
     public ResponseEntity addDevice(@RequestBody DeviceDTO deviceDTO){
         try{
             deviceService.addDevice(deviceDTO);
@@ -27,7 +27,7 @@ public class DeviceController {
         }
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/edit-device/{id}")
     public ResponseEntity editDeviceById(@PathVariable Long id, @RequestBody DeviceDTO deviceDTO){
         try {
             deviceService.editDevice(id, deviceDTO);
@@ -42,7 +42,7 @@ public class DeviceController {
         }
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete-device/{id}")
     public  ResponseEntity deleteDeviceById(@PathVariable Long id){
         try {
             deviceService.deleteDevice(id);
@@ -57,7 +57,7 @@ public class DeviceController {
         }
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/get-device/{id}")
     public ResponseEntity getDeviceById(@PathVariable Long id){
         try {
             DeviceDTO deviceDTO = deviceService.getDevice(id);
@@ -71,7 +71,7 @@ public class DeviceController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/get-devices")
     public ResponseEntity getAllDevice(){
         try {
             List<DeviceDTO> deviceDTOList = deviceService.getALlDevices();

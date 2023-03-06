@@ -5,20 +5,19 @@ import be.ucll.gip5.service.SpaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("space")
+@RequestMapping("spaces")
 public class SpaceController {
 
     @Autowired
     private SpaceService spaceService;
 
-    @PostMapping
+    @PostMapping("add-space")
     public ResponseEntity addSpace(@RequestBody SpaceDTO spaceDTO){
         try{
             spaceService.addSpace(spaceDTO);
@@ -29,7 +28,7 @@ public class SpaceController {
         }
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/edit-space/{id}")
     public ResponseEntity editSpaceById(@PathVariable Long id, @RequestBody SpaceDTO spaceDTO){
         try {
             spaceService.editSpace(spaceDTO, id);
@@ -44,7 +43,7 @@ public class SpaceController {
         }
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("delete-space/{id}")
     public  ResponseEntity deleteSpaceById(@PathVariable Long id){
         try {
             spaceService.deleteSpaceById(id);
@@ -59,7 +58,7 @@ public class SpaceController {
         }
     }
 
-    @GetMapping()
+    @GetMapping("/get-spaces")
     public ResponseEntity getAllSpaces(){
         try {
             List<SpaceDTO> spaceDTOList = spaceService.getAllSpaces();
@@ -70,13 +69,9 @@ public class SpaceController {
         }
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/get-space/{id}")
     public ResponseEntity getSpaceById(@PathVariable Long id){
         try{
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String name = auth.getPrincipal().toString();
-            System.out.println(name);
-
             SpaceDTO dto = spaceService.getSpaceById(id);
             return new ResponseEntity<>(dto,HttpStatus.FOUND);
         }catch (Exception e){

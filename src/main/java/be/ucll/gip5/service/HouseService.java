@@ -17,8 +17,11 @@ public class HouseService {
     @Autowired
     private DTOConverter dtoConverter;
 
-    public void addHouse(HouseDTO houseDTO){
+    public void addHouse(HouseDTO houseDTO) throws ClassNotFoundException {
         House house = dtoConverter.HouseDTOToEntity(houseDTO);
+        if (house.getName().equals(houseRepository.findByName(house.getName()))){
+            throw new ClassNotFoundException("Name already exists");
+        }
         houseRepository.save(house);
     }
 
@@ -26,6 +29,9 @@ public class HouseService {
         House house = houseRepository.findAllByHouseId(id);
         if (house != null){
             house = dtoConverter.HouseEntityToEntity(house, dto);
+            if (house.getName().equals(houseRepository.findByName(house.getName()))){
+                throw new ClassNotFoundException("Name already exists");
+            }
             houseRepository.save(house);
         }else {
             throw new ClassNotFoundException("House not Found");

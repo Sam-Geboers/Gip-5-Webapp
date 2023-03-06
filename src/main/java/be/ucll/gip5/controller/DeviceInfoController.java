@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("deviceInfo")
+@RequestMapping("devicesInfo")
 public class DeviceInfoController {
 
     @Autowired
     private DeviceInfoService deviceInfoService;
 
-    @PostMapping
+    @PostMapping("/add-device-info")
     public ResponseEntity addDeviceInfo(@RequestBody DeviceInfoDTO dto){
         try{
             deviceInfoService.addDeviceInfo(dto);
@@ -28,7 +28,7 @@ public class DeviceInfoController {
         }
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/edit-device-info/{id}")
     public ResponseEntity editDeviceInfoById(@PathVariable Long id, @RequestBody DeviceInfoDTO deviceInfoDTO){
         try {
             deviceInfoService.editDeviceInfo(deviceInfoDTO, id);
@@ -43,7 +43,7 @@ public class DeviceInfoController {
         }
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete-device-info{id}")
     public  ResponseEntity deleteDeviceInfoById(@PathVariable Long id){
         try {
             deviceInfoService.deleteDeviceInfo(id);
@@ -58,7 +58,7 @@ public class DeviceInfoController {
         }
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/get-device-info{id}")
     public ResponseEntity getDeviceInfoById(@PathVariable Long id){
         try {
             DeviceInfoDTO deviceInfoDTO = deviceInfoService.getDeviceInfoById(id);
@@ -72,7 +72,7 @@ public class DeviceInfoController {
         }
     }
 
-    @GetMapping
+    @GetMapping("get-devices-info")
     public ResponseEntity getAllDeviceInfo(){
         try {
             List<DeviceInfoDTO> deviceInfoDTOS = deviceInfoService.getAllDeviceInfo();

@@ -11,13 +11,13 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("house")
+@RequestMapping("houses")
 public class HouseController {
 
     @Autowired
     private HouseService houseService;
 
-    @PostMapping
+    @PostMapping("/add-house")
     public ResponseEntity addHouse(@RequestBody HouseDTO houseDTO){
         try{
             houseService.addHouse(houseDTO);
@@ -28,7 +28,7 @@ public class HouseController {
         }
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/edit-house/{id}")
     public ResponseEntity editHouseById(@PathVariable Long id, @RequestBody HouseDTO houseDTO){
         try {
             houseService.editHouse(houseDTO, id);
@@ -43,7 +43,7 @@ public class HouseController {
         }
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("delete-house/{id}")
     public  ResponseEntity deleteHouseById(@PathVariable Long id){
         try {
             houseService.deleteHouseById(id);
@@ -58,7 +58,7 @@ public class HouseController {
         }
     }
 
-    @GetMapping
+    @GetMapping("get-houses")
     public ResponseEntity getAllHouses(){
         try {
             List<HouseDTO> houseDTOList = houseService.getAllHouses();

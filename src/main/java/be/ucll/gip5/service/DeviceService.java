@@ -24,13 +24,12 @@ public class DeviceService {
 
     public void editDevice(Long id, DeviceDTO deviceDTO) throws Exception{
         Device device = deviceRepository.findAllByDeviceId(id);
-        if (device != null) {
-            device.setName(deviceDTO.getName());
-//            device.setSpace(deviceDTO.getSpace);
-            deviceRepository.save(device);
-        }else{
+        if (device == null) {
             throw new ClassNotFoundException("Device not found");
         }
+
+        device = dtoConverter.deviceEntityToEntity(device, deviceDTO);
+        deviceRepository.save(device);
     }
 
     public void deleteDevice(Long id) throws Exception{
