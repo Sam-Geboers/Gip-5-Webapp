@@ -20,6 +20,8 @@ public class SecurityConfig {
     //endpoints READ (update)
     private static final String[] UNSECURED_URLS = {"/spaces/get-space/{id}",
                                                     "/spaces/get-spaces/",
+                                                    "/users/add-user",
+                                                    "/users/edit-user/{id}",
                                                     "/houses/get-houses/",
                                                     "/devices/get-device/{id}",
                                                     "/devices/get-devices/",

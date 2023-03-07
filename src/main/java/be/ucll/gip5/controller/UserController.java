@@ -20,9 +20,12 @@ public class UserController {
 
     @PostMapping("/add-user")
     public ResponseEntity addUser(@RequestBody UserDTO userDTO){
-        try{
+        try {
             userService.addUser(userDTO);
             return new ResponseEntity("User successfully created", HttpStatus.CREATED);
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);

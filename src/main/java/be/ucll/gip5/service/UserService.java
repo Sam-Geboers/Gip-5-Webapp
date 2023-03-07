@@ -28,7 +28,7 @@ public class UserService {
             throw new ClassNotFoundException("Email is empty.");
         }else if (user.getPassword().trim().length() == 0 || user.getPassword().equals("")){
             throw new ClassNotFoundException("Password is empty.");
-        } else if (user.getEmail().equals(userRepository.findByEmail(user.getEmail()))) {
+        } else if (userRepository.existsByEmail(user.getEmail())) {
             throw new ClassNotFoundException("Email already exists.");
         }
 
