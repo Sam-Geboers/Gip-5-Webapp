@@ -19,8 +19,6 @@ public class HouseController {
 
     @Autowired
     private HouseService houseService;
-    @Autowired
-    private SpaceService spaceService;
 
     @PostMapping("/add-house")
     public ResponseEntity addHouse(@RequestBody HouseDTO houseDTO){
@@ -78,7 +76,7 @@ public class HouseController {
     public ResponseEntity getSpacesFromHouse(@PathVariable Long houseId){
         try {
             List<Space> getSpacesFromHouse = houseService.getSpacesFromHouse(houseId);
-            return new ResponseEntity<>(getSpacesFromHouse, HttpStatus.OK);
+            return new ResponseEntity<>(getSpacesFromHouse, HttpStatus.FOUND);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);

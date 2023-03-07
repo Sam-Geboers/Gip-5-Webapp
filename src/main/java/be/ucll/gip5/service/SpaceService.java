@@ -93,6 +93,8 @@ public class SpaceService {
 
         if (house == null) throw new ClassNotFoundException("House not found.");
         if (space == null) throw new ClassNotFoundException("Space not found.");
+        //redundant
+        if (space.getHouse() != null) throw new IllegalArgumentException("Space already in a house");
 
         space.setHouse(house);
         house.getSpaceList().add(space);
