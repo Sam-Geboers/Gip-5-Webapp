@@ -1,7 +1,9 @@
 package be.ucll.gip5.service;
 
 import be.ucll.gip5.dto.SpaceDTO;
+import be.ucll.gip5.entity.Device;
 import be.ucll.gip5.entity.Space;
+import be.ucll.gip5.repository.DeviceRepository;
 import be.ucll.gip5.repository.SpaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import java.util.List;
 public class SpaceService {
     @Autowired
     private SpaceRepository spaceRepository;
+    @Autowired
+    private DeviceRepository deviceRepository;
     @Autowired
     private DTOConverter dtoConverter;
 
@@ -56,5 +60,26 @@ public class SpaceService {
         }else {
             throw new ClassNotFoundException("Space not found");
         }
+    }
+
+    public void addDeviceToSpace(Long spaceId, Long deviceId) throws Exception{
+        Space space = spaceRepository.findAllBySpaceId(spaceId);
+        Device device = deviceRepository.findAllByDeviceId(deviceId);
+
+        if(space == null){
+            throw new ClassNotFoundException("Space not found");
+        } else if(device.getSpace() != null) {
+            throw new ClassNotFoundException("Device already in a space");
+        } else {
+            space.getDeviceList().add(device);
+        }
+    }
+
+    public List<Device> getDevicesFromSpace(Long spaceId) throws Exception{
+        Space space = spaceRepository.findAllBySpaceId(spaceId);
+        if(space == null){
+            throw new ClassNotFoundException("Space not found");
+        }
+        return space.getDeviceList();
     }
 }

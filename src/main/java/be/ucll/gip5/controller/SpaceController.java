@@ -1,6 +1,7 @@
 package be.ucll.gip5.controller;
 
 import be.ucll.gip5.dto.SpaceDTO;
+import be.ucll.gip5.entity.Device;
 import be.ucll.gip5.service.SpaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -75,6 +76,29 @@ public class SpaceController {
             SpaceDTO dto = spaceService.getSpaceById(id);
             return new ResponseEntity<>(dto,HttpStatus.FOUND);
         }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/add-device-to-space")
+    public ResponseEntity addDeviceToSpace(@PathVariable Long spaceId, @PathVariable Long deviceId){
+        try{
+            spaceService.addDeviceToSpace(spaceId, deviceId);
+            return new ResponseEntity("Device was succesfully added to space", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/get-devices-from-space")
+    public ResponseEntity getDevicesFromSpace(@PathVariable Long spaceId)
+    {
+        try{
+            List<Device> devicesFromSpace = spaceService.getDevicesFromSpace(spaceId);
+            return new ResponseEntity<>(devicesFromSpace, HttpStatus.OK);
+        } catch(Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
         }
