@@ -1,7 +1,10 @@
 package be.ucll.gip5.controller;
 
 import be.ucll.gip5.dto.HouseDTO;
+import be.ucll.gip5.entity.House;
+import be.ucll.gip5.entity.Space;
 import be.ucll.gip5.service.HouseService;
+import be.ucll.gip5.service.SpaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,8 @@ public class HouseController {
 
     @Autowired
     private HouseService houseService;
+    @Autowired
+    private SpaceService spaceService;
 
     @PostMapping("/add-house")
     public ResponseEntity addHouse(@RequestBody HouseDTO houseDTO){
@@ -63,6 +68,17 @@ public class HouseController {
         try {
             List<HouseDTO> houseDTOList = houseService.getAllHouses();
             return new ResponseEntity<>(houseDTOList, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/get-spaces-from-house")
+    public ResponseEntity getSpacesFromHouse(@PathVariable Long houseId){
+        try {
+            List<Space> getSpacesFromHouse = houseService.getSpacesFromHouse(houseId);
+            return new ResponseEntity<>(getSpacesFromHouse, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);

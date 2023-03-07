@@ -2,7 +2,9 @@ package be.ucll.gip5.service;
 
 import be.ucll.gip5.dto.HouseDTO;
 import be.ucll.gip5.entity.House;
+import be.ucll.gip5.entity.Space;
 import be.ucll.gip5.repository.HouseRepository;
+import be.ucll.gip5.repository.SpaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ public class HouseService {
 
     @Autowired
     private HouseRepository houseRepository;
+    @Autowired
+    private SpaceRepository spaceRepository;
     @Autowired
     private DTOConverter dtoConverter;
 
@@ -65,4 +69,13 @@ public class HouseService {
         }
 
     }
+
+    public List<Space> getSpacesFromHouse(Long houseId) throws Exception{
+        House house = houseRepository.findAllByHouseId(houseId);
+
+        if (house == null) throw new ClassNotFoundException("House not found.");
+
+        return house.getSpaceList();
+    }
+
 }
