@@ -39,20 +39,19 @@ public class UserService {
     }
     public void editUser(UserDTO dto, Long id) throws Exception{
         User user = userRepository.findAllByUserId(id);
-        if (user != null){
-            user = dtoConverter.UserEntityToEntity(user,dto);
-            userRepository.save(user);
-        }else {
-            throw new ClassNotFoundException("Person not found");
-        }
+
+        if (user == null) throw new ClassNotFoundException("Person not found.");
+
+        user = dtoConverter.UserEntityToEntity(user,dto);
+        userRepository.save(user);
     }
     public void deleteUserById(Long id) throws Exception{
         User user = userRepository.findAllByUserId(id);
-        if (user != null){
-            userRepository.delete(user);
-        }else {
-            throw new ClassNotFoundException("Person not found");
-        }
+
+        if (user == null) throw new ClassNotFoundException("Person not found.");
+
+        userRepository.delete(user);
+
     }
 //    public List<UserDTO> getAllUsers(){
 //        List<User> userList = userRepository.findAll();

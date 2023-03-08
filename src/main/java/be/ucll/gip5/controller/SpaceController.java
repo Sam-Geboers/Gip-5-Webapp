@@ -1,7 +1,9 @@
 package be.ucll.gip5.controller;
 
+import be.ucll.gip5.dto.HouseDTO;
 import be.ucll.gip5.dto.SpaceDTO;
 import be.ucll.gip5.entity.Device;
+import be.ucll.gip5.entity.House;
 import be.ucll.gip5.service.SpaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +21,9 @@ public class SpaceController {
     private SpaceService spaceService;
 
     @PostMapping("add-space")
-    public ResponseEntity addSpace(@RequestBody SpaceDTO spaceDTO){
+    public ResponseEntity addSpace(@RequestBody SpaceDTO spaceDTO, @PathVariable Long id){
         try{
-            spaceService.addSpace(spaceDTO);
+            spaceService.addSpace(spaceDTO, id);
             return new ResponseEntity("Space successfully created", HttpStatus.CREATED);
         }catch (Exception e){
             e.printStackTrace();

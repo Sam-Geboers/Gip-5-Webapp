@@ -24,9 +24,18 @@ public class SpaceService {
     @Autowired
     private DTOConverter dtoConverter;
 
-    public void addSpace(SpaceDTO dto){
+    public void addSpace(SpaceDTO dto, Long houseId) throws ClassNotFoundException {
         Space space = dtoConverter.SpaceDTOToEntity(dto);
         spaceRepository.save(space);
+//
+        House house = houseRepository.findAllByHouseId(houseId);
+
+        if (house == null) throw new ClassNotFoundException("House not found.");
+
+        space.setHouse(house);
+        house.getSpaceList().add(space);
+        spaceRepository.save(space);
+//
     }
 
     public void editSpace(SpaceDTO dto, Long id) throws Exception{
@@ -87,18 +96,18 @@ public class SpaceService {
         return space.getDeviceList();
     }
 
-    public void addSpaceToHouse(Long houseId, Long spaceId) throws Exception{
-        House house = houseRepository.findAllByHouseId(houseId);
-        Space space = spaceRepository.findAllBySpaceId(spaceId);
-
-        if (house == null) throw new ClassNotFoundException("House not found.");
-        if (space == null) throw new ClassNotFoundException("Space not found.");
-        //redundant
-        if (space.getHouse() != null) throw new IllegalArgumentException("Space already in a house");
-
-        space.setHouse(house);
-        house.getSpaceList().add(space);
-
-        spaceRepository.save(space);
-    }
+//    public void addSpaceToHouse(Long houseId, Long spaceId) throws Exception{
+//        House house = houseRepository.findAllByHouseId(houseId);
+//        Space space = spaceRepository.findAllBySpaceId(spaceId);
+//
+//        if (house == null) throw new ClassNotFoundException("House not found.");
+//        if (space == null) throw new ClassNotFoundException("Space not found.");
+//        //redundant
+//        if (space.getHouse() != null) throw new IllegalArgumentException("Space already in a house");
+//
+//        space.setHouse(house);
+//        house.getSpaceList().add(space);
+//
+//        spaceRepository.save(space);
+//    }
 }
