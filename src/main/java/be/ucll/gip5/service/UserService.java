@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Service
 public class UserService {
@@ -32,7 +35,7 @@ public class UserService {
             throw new ClassNotFoundException("Email already exists.");
         }
 
-        if (user.getRoles().isEmpty()) user.setRoles("USER");
+        if (user.getRoles() == null) user.setRoles("USER");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
@@ -53,20 +56,20 @@ public class UserService {
         userRepository.delete(user);
 
     }
-//    public List<UserDTO> getAllUsers(){
-//        List<User> userList = userRepository.findAll();
-//        List<UserDTO> userDTOS = new ArrayList<>();
-//        for(User p: userList){
-//            userDTOS.add(dtoConverter.UserEntityToDTO(p));
-//        }
-//        return userDTOS;
-//    }
-//    public UserDTO getUserById(Long id) throws Exception{
-//        User user = userRepository.findAllByUserId(id);
-//        if (user != null){
-//            return dtoConverter.UserEntityToDTO(user);
-//        }else {
-//            throw new ClassNotFoundException("Person not found");
-//        }
-//    }
+    public List<UserDTO> getAllUsers(){
+        List<User> userList = userRepository.findAll();
+        List<UserDTO> userDTOS = new ArrayList<>();
+        for(User p: userList){
+            userDTOS.add(dtoConverter.UserEntityToDTO(p));
+        }
+        return userDTOS;
+    }
+    public UserDTO getUserById(Long id) throws Exception{
+        User user = userRepository.findAllByUserId(id);
+        if (user != null){
+            return dtoConverter.UserEntityToDTO(user);
+        }else {
+            throw new ClassNotFoundException("Person not found");
+        }
+    }
 }

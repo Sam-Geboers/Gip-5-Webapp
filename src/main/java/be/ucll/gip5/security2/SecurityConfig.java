@@ -19,12 +19,11 @@ public class SecurityConfig {
                                                     "/devicesInfo/**"};
     //endpoints READ (update)
     private static final String[] UNSECURED_URLS = {"/spaces/get-space/{id}",
-                                                    "/spaces/get-spaces/",
+                                                    "/spaces/get-spaces",
                                                     "/users/add-user",
-                                                    "/users/edit-user/{id}",
-                                                    "/houses/get-houses/",
+                                                    "/houses/get-houses",
                                                     "/devices/get-device/{id}",
-                                                    "/devices/get-devices/",
+                                                    "/devices/get-devices",
                                                     "/devicesInfo/edit-device-info/{id}",
                                                     "/devicesInfo/get-device-info/{id}",
                                                     "/swagger-ui/",

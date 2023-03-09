@@ -20,7 +20,7 @@ public class SpaceController {
     @Autowired
     private SpaceService spaceService;
 
-    @PostMapping("add-space")
+    @PostMapping("add-space/{id}")
     public ResponseEntity addSpace(@RequestBody SpaceDTO spaceDTO, @PathVariable Long id){
         try{
             spaceService.addSpace(spaceDTO, id);

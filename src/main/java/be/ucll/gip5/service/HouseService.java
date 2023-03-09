@@ -1,6 +1,7 @@
 package be.ucll.gip5.service;
 
 import be.ucll.gip5.dto.HouseDTO;
+import be.ucll.gip5.dto.HouseWithListDTO;
 import be.ucll.gip5.entity.House;
 import be.ucll.gip5.entity.Space;
 import be.ucll.gip5.repository.HouseRepository;
@@ -51,11 +52,18 @@ public class HouseService {
         }
     }
 
-    public List<HouseDTO> getAllHouses(){
+    public List<HouseWithListDTO> getAllHouses(){
         List<House> houseList = houseRepository.findAll();
-        List<HouseDTO> houseDTOS = new ArrayList<>();
+        List<HouseWithListDTO> houseDTOS = new ArrayList<>();
         for(House h: houseList){
-            houseDTOS.add(dtoConverter.HouseEntityToDTO(h));
+            HouseWithListDTO house = new HouseWithListDTO();
+            house.setName(h.getName());
+            house.setAddress(h.getAddress());
+            house.setSpaceList(new ArrayList<>());
+            for (Space s:h.getSpaceList()) {
+                house.getSpaceList().add(dtoConverter.SpaceEntityToDTO(s));
+            }
+            houseDTOS.add(house);
         }
         return houseDTOS;
     }

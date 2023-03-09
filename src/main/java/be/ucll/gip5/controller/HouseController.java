@@ -1,6 +1,7 @@
 package be.ucll.gip5.controller;
 
 import be.ucll.gip5.dto.HouseDTO;
+import be.ucll.gip5.dto.HouseWithListDTO;
 import be.ucll.gip5.entity.House;
 import be.ucll.gip5.entity.Space;
 import be.ucll.gip5.service.HouseService;
@@ -64,7 +65,7 @@ public class HouseController {
     @GetMapping("get-houses")
     public ResponseEntity getAllHouses(){
         try {
-            List<HouseDTO> houseDTOList = houseService.getAllHouses();
+            List<HouseWithListDTO> houseDTOList = houseService.getAllHouses();
             return new ResponseEntity<>(houseDTOList, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();

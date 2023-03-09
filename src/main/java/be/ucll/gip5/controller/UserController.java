@@ -62,28 +62,28 @@ public class UserController {
         }
     }
 
-//    @GetMapping("{id}")
-//    public ResponseEntity getUserById(@PathVariable Long id){
-//        try {
-//            UserDTO userDTO = userService.getUserById(id);
-//            return new ResponseEntity<>(userDTO, HttpStatus.OK);
-//        }catch (ClassNotFoundException e){
-//            e.printStackTrace();
-//            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return new ResponseEntity(e, HttpStatus.NOT_FOUND);
-//        }
-//    }
+    @GetMapping("{id}")
+    public ResponseEntity getUserById(@PathVariable Long id){
+        try {
+            UserDTO userDTO = userService.getUserById(id);
+            return new ResponseEntity<>(userDTO, HttpStatus.OK);
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity(e, HttpStatus.NOT_FOUND);
+        }
+    }
 
-//    @GetMapping
-//    public ResponseEntity getAllUsers(){
-//        try {
-//            List<UserDTO> userDTOSList = userService.getAllUsers();
-//            return new ResponseEntity<>(userDTOSList, HttpStatus.OK);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
-//        }
-//    }
+    @GetMapping
+    public ResponseEntity getAllUsers(){
+        try {
+            List<UserDTO> userDTOSList = userService.getAllUsers();
+            return new ResponseEntity<>(userDTOSList, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
+        }
+    }
 }
