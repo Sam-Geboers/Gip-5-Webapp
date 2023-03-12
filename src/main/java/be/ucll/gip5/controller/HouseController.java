@@ -83,4 +83,15 @@ public class HouseController {
             return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
         }
     }
+
+    @PostMapping("/add-user-to-house")
+    public ResponseEntity addUserToHouse(@PathVariable Long houseId, @PathVariable Long userId){
+        try{
+            houseService.addUserToHouse(houseId, userId);
+            return new ResponseEntity("User was succesfully added to house", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
+        }
+    }
 }

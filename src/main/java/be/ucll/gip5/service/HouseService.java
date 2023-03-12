@@ -4,8 +4,10 @@ import be.ucll.gip5.dto.HouseDTO;
 import be.ucll.gip5.dto.HouseWithListDTO;
 import be.ucll.gip5.entity.House;
 import be.ucll.gip5.entity.Space;
+import be.ucll.gip5.entity.User;
 import be.ucll.gip5.repository.HouseRepository;
 import be.ucll.gip5.repository.SpaceRepository;
+import be.ucll.gip5.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,8 @@ public class HouseService {
     private SpaceRepository spaceRepository;
     @Autowired
     private DTOConverter dtoConverter;
+    @Autowired
+    private UserRepository userRepository;
 
     public void addHouse(HouseDTO houseDTO) throws ClassNotFoundException {
         House house = dtoConverter.HouseDTOToEntity(houseDTO);
@@ -84,6 +88,19 @@ public class HouseService {
         if (house == null) throw new ClassNotFoundException("House not found.");
 
         return house.getSpaceList();
+    }
+
+    public void addUserToHouse(Long houseId, Long userId) throws Exception{
+        House house = houseRepository.findAllByHouseId(houseId);
+        User user = userRepository.findAllByUserId(userId);
+
+        if (house == null) {
+            throw new ClassNotFoundException("House not found");
+        }
+        if (user == null) {
+            throw new ClassNotFoundException("User not found");
+        }
+        house.getUserList().add(user);
     }
 
 }
