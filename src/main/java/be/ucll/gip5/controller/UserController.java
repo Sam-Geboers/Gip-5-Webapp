@@ -86,4 +86,15 @@ public class UserController {
             return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("{email}")
+    public ResponseEntity getUserByEmail(@PathVariable String email) throws Exception {
+        try{
+            UserDTO userDTO = userService.getUserByEmail(email);
+            return new ResponseEntity<>(userDTO, HttpStatus.OK);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
+        }
+    }
 }

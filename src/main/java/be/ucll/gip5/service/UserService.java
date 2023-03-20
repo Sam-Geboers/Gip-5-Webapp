@@ -43,7 +43,7 @@ public class UserService {
     public void editUser(UserDTO dto, Long id) throws Exception{
         User user = userRepository.findAllByUserId(id);
 
-        if (user == null) throw new ClassNotFoundException("Person not found.");
+        if (user == null) throw new ClassNotFoundException("User not found.");
 
         user = dtoConverter.UserEntityToEntity(user,dto);
         userRepository.save(user);
@@ -51,7 +51,7 @@ public class UserService {
     public void deleteUserById(Long id) throws Exception{
         User user = userRepository.findAllByUserId(id);
 
-        if (user == null) throw new ClassNotFoundException("Person not found.");
+        if (user == null) throw new ClassNotFoundException("User not found.");
 
         userRepository.delete(user);
 
@@ -71,5 +71,13 @@ public class UserService {
         }else {
             throw new ClassNotFoundException("Person not found");
         }
+    }
+
+    public UserDTO getUserByEmail(String email) throws Exception {
+        User user = userRepository.findUserByEmail(email);
+
+        if (user == null) throw new ClassNotFoundException("User not found.");
+
+        return dtoConverter.UserEntityToDTO(user);
     }
 }
