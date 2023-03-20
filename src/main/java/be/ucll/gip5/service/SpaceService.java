@@ -26,16 +26,14 @@ public class SpaceService {
 
     public void addSpace(SpaceDTO dto, Long houseId) throws ClassNotFoundException {
         Space space = dtoConverter.SpaceDTOToEntity(dto);
-        spaceRepository.save(space);
-//
         House house = houseRepository.findAllByHouseId(houseId);
 
         if (house == null) throw new ClassNotFoundException("House not found.");
 
         space.setHouse(house);
         house.getSpaceList().add(space);
+
         spaceRepository.save(space);
-//
     }
 
     public void editSpace(SpaceDTO dto, Long id) throws Exception{
