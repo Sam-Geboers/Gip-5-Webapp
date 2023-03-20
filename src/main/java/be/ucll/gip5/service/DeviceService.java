@@ -1,9 +1,12 @@
 package be.ucll.gip5.service;
 
 import be.ucll.gip5.dto.DeviceDTO;
+import be.ucll.gip5.dto.DeviceInfoDTO;
 import be.ucll.gip5.entity.Device;
+import be.ucll.gip5.entity.DeviceInfo;
 import be.ucll.gip5.entity.House;
 import be.ucll.gip5.entity.Space;
+import be.ucll.gip5.repository.DeviceInfoRepository;
 import be.ucll.gip5.repository.DeviceRepository;
 import be.ucll.gip5.repository.SpaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,8 @@ public class DeviceService {
     private SpaceRepository spaceRepository;
     @Autowired
     private DTOConverter dtoConverter;
+    @Autowired
+    private DeviceInfoRepository deviceInfoRepository;
 
     public void addDevice(DeviceDTO deviceDTO, Long spaceId) throws Exception{
         Device device = dtoConverter.DeviceDTOToEntity(deviceDTO);
@@ -70,4 +75,20 @@ public class DeviceService {
         }
         return deviceDTOS;
     }
+
+    public void addDeviceInfoToDevice(Long deviceId, Long deviceInfoId) throws Exception{
+        Device device = deviceRepository.findAllByDeviceId(deviceId);
+        DeviceInfo deviceInfo = deviceInfoRepository.findAllByDeviceInfoId(deviceInfoId);
+
+        if(device == null){
+            throw new ClassNotFoundException("Device not found");
+        }
+        if(deviceInfo == null){
+            throw new ClassNotFoundException("DeviceInfo not found");
+        }
+
+        device.setDeviceInfo(deviceInfo);
+        deviceRepository.save(device);
+    }
+
 }

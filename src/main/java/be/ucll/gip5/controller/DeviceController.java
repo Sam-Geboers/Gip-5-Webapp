@@ -1,6 +1,7 @@
 package be.ucll.gip5.controller;
 
 import be.ucll.gip5.dto.DeviceDTO;
+import be.ucll.gip5.dto.DeviceInfoDTO;
 import be.ucll.gip5.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -81,4 +82,17 @@ public class DeviceController {
             return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
         }
     }
+
+    @PostMapping("/add-deviceInfo-to-device/{deviceId}/{deviceInfoId}")
+    public ResponseEntity addDeviceInfoToDevice(@PathVariable Long deviceId, @PathVariable Long deviceInfoId){
+        try{
+            deviceService.addDeviceInfoToDevice(deviceId, deviceInfoId);
+            return new ResponseEntity("DeviceInfo was succesfully added to device", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 }
