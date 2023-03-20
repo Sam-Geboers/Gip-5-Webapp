@@ -82,18 +82,7 @@ public class SpaceController {
             return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
         }
     }
-
-    @PostMapping("/add-device-to-space")
-    public ResponseEntity addDeviceToSpace(@PathVariable Long spaceId, @PathVariable Long deviceId){
-        try{
-            spaceService.addDeviceToSpace(spaceId, deviceId);
-            return new ResponseEntity("Device was succesfully added to space", HttpStatus.OK);
-        }catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
-        }
-    }
-
+    
     @GetMapping("/get-devices-from-space")
     public ResponseEntity getDevicesFromSpace(@PathVariable Long spaceId)
     {

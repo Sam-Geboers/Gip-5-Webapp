@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class DeviceInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long deviceInfoId;
+    private Long deviceInfoId;
     private boolean deviceStatus;
     private String consumption;
     private String typeOfDevice;

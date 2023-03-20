@@ -72,20 +72,6 @@ public class SpaceService {
             throw new ClassNotFoundException("Space not found");
         }
     }
-
-    public void addDeviceToSpace(Long spaceId, Long deviceId) throws Exception{
-        Space space = spaceRepository.findAllBySpaceId(spaceId);
-        Device device = deviceRepository.findAllByDeviceId(deviceId);
-
-        if(space == null){
-            throw new ClassNotFoundException("Space not found");
-        } else if(device.getSpace() != null) {
-            throw new ClassNotFoundException("Device already in a space");
-        } else {
-            space.getDeviceList().add(device);
-        }
-    }
-
     public List<Device> getDevicesFromSpace(Long spaceId) throws Exception{
         Space space = spaceRepository.findAllBySpaceId(spaceId);
         if(space == null){
@@ -93,19 +79,4 @@ public class SpaceService {
         }
         return space.getDeviceList();
     }
-
-//    public void addSpaceToHouse(Long houseId, Long spaceId) throws Exception{
-//        House house = houseRepository.findAllByHouseId(houseId);
-//        Space space = spaceRepository.findAllBySpaceId(spaceId);
-//
-//        if (house == null) throw new ClassNotFoundException("House not found.");
-//        if (space == null) throw new ClassNotFoundException("Space not found.");
-//        //redundant
-//        if (space.getHouse() != null) throw new IllegalArgumentException("Space already in a house");
-//
-//        space.setHouse(house);
-//        house.getSpaceList().add(space);
-//
-//        spaceRepository.save(space);
-//    }
 }

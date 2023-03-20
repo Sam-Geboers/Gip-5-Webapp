@@ -100,7 +100,9 @@ public class HouseService {
         if (user == null) {
             throw new ClassNotFoundException("User not found");
         }
+        user.getHouseList().add(house);
         house.getUserList().add(user);
+        houseRepository.save(house);
     }
 
 }

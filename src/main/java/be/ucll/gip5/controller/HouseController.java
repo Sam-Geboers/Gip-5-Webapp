@@ -84,7 +84,7 @@ public class HouseController {
         }
     }
 
-    @PostMapping("/add-user-to-house")
+    @PostMapping("/add-user-to-house/{houseId}/{userId}")
     public ResponseEntity addUserToHouse(@PathVariable Long houseId, @PathVariable Long userId){
         try{
             houseService.addUserToHouse(houseId, userId);

@@ -16,10 +16,10 @@ public class DeviceController {
     @Autowired
     private DeviceService deviceService;
 
-    @PostMapping("/add-device")
-    public ResponseEntity addDevice(@RequestBody DeviceDTO deviceDTO){
+    @PostMapping("/add-device/{id}")
+    public ResponseEntity addDevice(@RequestBody DeviceDTO deviceDTO, @PathVariable Long id){
         try{
-            deviceService.addDevice(deviceDTO);
+            deviceService.addDevice(deviceDTO, id);
             return new ResponseEntity("Device successfully created", HttpStatus.CREATED);
         }catch (Exception e){
             e.printStackTrace();
