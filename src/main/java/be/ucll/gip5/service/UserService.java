@@ -80,4 +80,15 @@ public class UserService {
 
         return dtoConverter.UserEntityToDTO(user);
     }
+
+    public void userLogin (String email, String pass) throws ClassNotFoundException {
+        User user = userRepository.findUserByEmail(email);
+
+        if (user == null) throw new ClassNotFoundException("User not found.");
+
+        if (!user.getEmail().equals(email) || !user.getPassword().equals(pass)) {
+            throw new IllegalArgumentException("Email or password are incorect.");
+        }
+
+    }
 }

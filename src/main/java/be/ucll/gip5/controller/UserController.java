@@ -87,13 +87,23 @@ public class UserController {
         }
     }
 
-    @GetMapping("{email}")
+    @GetMapping("/get-user-by-email/{email}")
     public ResponseEntity getUserByEmail(@PathVariable String email) throws Exception {
         try{
             UserDTO userDTO = userService.getUserByEmail(email);
             return new ResponseEntity<>(userDTO, HttpStatus.OK);
         }catch (Exception e) {
             e.printStackTrace();
+            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/login/{email}/{password}")
+    public ResponseEntity login(@PathVariable String email, @PathVariable String password) throws Exception {
+        try {
+            userService.userLogin(email, password);
+            return new ResponseEntity("Login succeeded ", HttpStatus.OK);
+        }catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
         }
     }
