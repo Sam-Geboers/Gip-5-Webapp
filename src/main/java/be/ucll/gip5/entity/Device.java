@@ -19,6 +19,6 @@ public class Device {
     private Space space;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "deviceInfo_id")
+    @JoinColumn(name = "device")
     private DeviceInfo deviceInfo;
 }

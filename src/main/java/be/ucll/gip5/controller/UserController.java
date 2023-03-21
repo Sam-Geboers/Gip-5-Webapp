@@ -41,7 +41,7 @@ public class UserController {
         }
         catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -70,7 +70,7 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity(e, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -86,7 +86,7 @@ public class UserController {
     }
 
     @GetMapping("/get-user-by-email/{email}")
-    public ResponseEntity getUserByEmail(@PathVariable String email) throws Exception {
+    public ResponseEntity getUserByEmail(@PathVariable String email) {
         try{
             UserDTO userDTO = userService.getUserByEmail(email);
             return new ResponseEntity<>(userDTO, HttpStatus.OK);
@@ -97,7 +97,7 @@ public class UserController {
     }
 
     @GetMapping("/login/{email}/{password}")
-    public ResponseEntity login(@PathVariable String email, @PathVariable String password) throws Exception {
+    public ResponseEntity login(@PathVariable String email, @PathVariable String password) {
         try {
             userService.userLogin(email, password);
             return new ResponseEntity<>("Login succeeded ", HttpStatus.OK);

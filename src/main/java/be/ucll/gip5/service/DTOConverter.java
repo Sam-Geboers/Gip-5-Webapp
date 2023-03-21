@@ -44,9 +44,6 @@ public class DTOConverter {
 
     public Device deviceEntityToEntity(Device device, DeviceDTO dto){
         device.setName(dto.getName());
-        //werkt nog niet
-//        device.setSpace(dto.get);
-//        device.setDeviceInfo(dto.get);
         return device;
     }
     /***House***/

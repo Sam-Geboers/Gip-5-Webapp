@@ -16,7 +16,6 @@ public class DeviceInfo {
     private boolean deviceStatus;
     private String consumption;
     private String typeOfDevice;
-    //miss veranderen naar json list
     private String deviceInformation;
 
     @OneToOne(mappedBy = "deviceInfo")
