@@ -16,6 +16,15 @@ public class UserControllerTests {
     @Autowired
     private WebTestClient client;
 
+    @AfterEach
+    public void cleanUpEach(){
+        UserBody userBody = new UserBody(
+                "",
+                "",
+                "",
+                "");
+    }
+
     @Test
     @DisplayName("Test should pass if User is successfully created")
     public void addUserSuccessfully(){
@@ -54,15 +63,6 @@ public class UserControllerTests {
     @DisplayName("Test should pass if User is successfully edited")
     public void editUserSuccessfully(){
 
-    }
-
-    @AfterEach
-    public void cleanUpEach(){
-        UserBody userBody = new UserBody(
-                "",
-                "",
-                "",
-                "");
     }
 
 
