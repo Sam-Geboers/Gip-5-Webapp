@@ -64,6 +64,7 @@ public class SpaceService {
             for (Device d: s.getDeviceList()) {
                 space.getDeviceList().add(dtoConverter.DeviceEntityToDTO(d));
             }
+            spaceDTOS.add(space);
         }
         return spaceDTOS;
     }

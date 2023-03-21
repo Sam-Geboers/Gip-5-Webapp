@@ -2,10 +2,15 @@ package be.ucll.gip5.service;
 
 import be.ucll.gip5.dto.*;
 import be.ucll.gip5.entity.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DTOConverter {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     /***Device***/
     public Device DeviceDTOToEntity(DeviceDTO dto){
         Device device = new Device();
@@ -67,12 +72,12 @@ public class DTOConverter {
         return house;
     }
 
-    /***Person***/
+    /***User***/
     public User UserDTOToEntity(UserDTO dto){
         User user = new User();
         user.setEmail(dto.getEmail());
         user.setUsername(dto.getUsername());
-        user.setPassword(dto.getPassword());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setRoles(dto.getRole());
         return user;
     }
@@ -80,12 +85,12 @@ public class DTOConverter {
         UserDTO dto = new UserDTO();
         dto.setEmail(user.getEmail());
         dto.setPassword(user.getPassword());
-        dto.setUsername(user.getUsername());
+        dto.setPassword(passwordEncoder.encode(user.getPassword()));
         dto.setRole(user.getRoles());
         return dto;
     }
     public User UserEntityToEntity(User user, UserDTO dto){
-        user.setPassword(dto.getPassword());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setEmail(dto.getEmail());
         user.setUsername(dto.getUsername());
         user.setRoles(dto.getRole());
