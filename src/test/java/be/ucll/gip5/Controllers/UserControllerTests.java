@@ -1,5 +1,6 @@
 package be.ucll.gip5.Controllers;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,14 @@ public class UserControllerTests {
 
     }
 
+    @AfterEach
+    public void cleanUpEach(){
+        UserBody userBody = new UserBody(
+                "",
+                "",
+                "",
+                "");
+    }
 
 
     private static class UserBody{
