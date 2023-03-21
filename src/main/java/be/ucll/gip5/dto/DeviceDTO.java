@@ -7,4 +7,7 @@ public class DeviceDTO {
     @Getter
     @Setter
     private String name;
+    @Getter
+    @Setter
+    private DeviceInfoDTO deviceInfo;
 }
