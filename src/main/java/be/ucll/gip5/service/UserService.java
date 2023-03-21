@@ -35,7 +35,10 @@ public class UserService {
             throw new ClassNotFoundException("Email already exists.");
         }
 
-        if (user.getRoles() == null) user.setRoles("USER");
+        if (user.getRoles() == null ||
+                !user.getRoles().equals("ADMIN") ||
+                !user.getRoles().equals("USER"))
+            user.setRoles("USER");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
