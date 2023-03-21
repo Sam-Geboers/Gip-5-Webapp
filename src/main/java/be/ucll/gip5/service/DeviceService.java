@@ -1,10 +1,8 @@
 package be.ucll.gip5.service;
 
 import be.ucll.gip5.dto.DeviceDTO;
-import be.ucll.gip5.dto.DeviceInfoDTO;
 import be.ucll.gip5.entity.Device;
 import be.ucll.gip5.entity.DeviceInfo;
-import be.ucll.gip5.entity.House;
 import be.ucll.gip5.entity.Space;
 import be.ucll.gip5.repository.DeviceInfoRepository;
 import be.ucll.gip5.repository.DeviceRepository;

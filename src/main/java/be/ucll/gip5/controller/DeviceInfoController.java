@@ -21,10 +21,10 @@ public class DeviceInfoController {
     public ResponseEntity addDeviceInfo(@RequestBody DeviceInfoDTO dto){
         try{
             deviceInfoService.addDeviceInfo(dto);
-            return new ResponseEntity("DeviceInfo successfully created", HttpStatus.CREATED);
+            return new ResponseEntity<>("DeviceInfo successfully created", HttpStatus.CREATED);
         }catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -32,14 +32,14 @@ public class DeviceInfoController {
     public ResponseEntity editDeviceInfoById(@PathVariable Long id, @RequestBody DeviceInfoDTO deviceInfoDTO){
         try {
             deviceInfoService.editDeviceInfo(deviceInfoDTO, id);
-            return new ResponseEntity("DeviceInfo was successfully edited", HttpStatus.OK);
+            return new ResponseEntity<>("DeviceInfo was successfully edited", HttpStatus.OK);
         }
         catch (ClassNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -47,7 +47,7 @@ public class DeviceInfoController {
     public  ResponseEntity deleteDeviceInfoById(@PathVariable Long id){
         try {
             deviceInfoService.deleteDeviceInfo(id);
-            return new ResponseEntity("DeviceInfo was successfully deleted", HttpStatus.OK);
+            return new ResponseEntity<>("DeviceInfo was successfully deleted", HttpStatus.OK);
         }
         catch (ClassNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -68,7 +68,7 @@ public class DeviceInfoController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity(e, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
         }
     }
 

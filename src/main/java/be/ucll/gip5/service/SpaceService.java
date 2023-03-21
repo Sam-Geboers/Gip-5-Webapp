@@ -4,7 +4,6 @@ import be.ucll.gip5.dto.SpaceDTO;
 import be.ucll.gip5.entity.Device;
 import be.ucll.gip5.entity.House;
 import be.ucll.gip5.entity.Space;
-import be.ucll.gip5.repository.DeviceRepository;
 import be.ucll.gip5.repository.HouseRepository;
 import be.ucll.gip5.repository.SpaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,6 @@ import java.util.List;
 public class SpaceService {
     @Autowired
     private SpaceRepository spaceRepository;
-    @Autowired
-    private DeviceRepository deviceRepository;
     @Autowired
     private HouseRepository houseRepository;
     @Autowired

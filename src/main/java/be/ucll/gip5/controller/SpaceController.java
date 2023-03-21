@@ -1,9 +1,7 @@
 package be.ucll.gip5.controller;
 
-import be.ucll.gip5.dto.HouseDTO;
 import be.ucll.gip5.dto.SpaceDTO;
 import be.ucll.gip5.entity.Device;
-import be.ucll.gip5.entity.House;
 import be.ucll.gip5.service.SpaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,10 +22,10 @@ public class SpaceController {
     public ResponseEntity addSpace(@RequestBody SpaceDTO spaceDTO, @PathVariable Long id){
         try{
             spaceService.addSpace(spaceDTO, id);
-            return new ResponseEntity("Space successfully created", HttpStatus.CREATED);
+            return new ResponseEntity<>("Space successfully created", HttpStatus.CREATED);
         }catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -35,14 +33,14 @@ public class SpaceController {
     public ResponseEntity editSpaceById(@PathVariable Long id, @RequestBody SpaceDTO spaceDTO){
         try {
             spaceService.editSpace(spaceDTO, id);
-            return new ResponseEntity("Space was successfully edited", HttpStatus.OK);
+            return new ResponseEntity<>("Space was successfully edited", HttpStatus.OK);
         }
         catch (ClassNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -50,7 +48,7 @@ public class SpaceController {
     public  ResponseEntity deleteSpaceById(@PathVariable Long id){
         try {
             spaceService.deleteSpaceById(id);
-            return new ResponseEntity("Space was successfully deleted", HttpStatus.OK);
+            return new ResponseEntity<>("Space was successfully deleted", HttpStatus.OK);
         }
         catch (ClassNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);

@@ -47,6 +47,6 @@ public class MailService {
                 .concat("List of spaces: "+house.getSpaceList())
                 .concat(newLine)
                 .concat(newLine)
-                .concat("A lot of succes by using your new Smart Home Control!");
+                .concat("A lot of success by using your new Smart Home Control!");
     }
 }

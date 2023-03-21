@@ -2,10 +2,8 @@ package be.ucll.gip5.controller;
 
 import be.ucll.gip5.dto.HouseDTO;
 import be.ucll.gip5.dto.HouseWithListDTO;
-import be.ucll.gip5.entity.House;
 import be.ucll.gip5.entity.Space;
 import be.ucll.gip5.service.HouseService;
-import be.ucll.gip5.service.SpaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +23,10 @@ public class HouseController {
     public ResponseEntity addHouse(@RequestBody HouseDTO houseDTO){
         try{
             houseService.addHouse(houseDTO);
-            return new ResponseEntity("House successfully created", HttpStatus.CREATED);
+            return new ResponseEntity<>("House successfully created", HttpStatus.CREATED);
         }catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -36,14 +34,14 @@ public class HouseController {
     public ResponseEntity editHouseById(@PathVariable Long id, @RequestBody HouseDTO houseDTO){
         try {
             houseService.editHouse(houseDTO, id);
-            return new ResponseEntity("House was successfully edited", HttpStatus.OK);
+            return new ResponseEntity<>("House was successfully edited", HttpStatus.OK);
         }
         catch (ClassNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -51,7 +49,7 @@ public class HouseController {
     public  ResponseEntity deleteHouseById(@PathVariable Long id){
         try {
             houseService.deleteHouseById(id);
-            return new ResponseEntity("House was successfully deleted", HttpStatus.OK);
+            return new ResponseEntity<>("House was successfully deleted", HttpStatus.OK);
         }
         catch (ClassNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -88,7 +86,7 @@ public class HouseController {
     public ResponseEntity addUserToHouse(@PathVariable Long houseId, @PathVariable Long userId){
         try{
             houseService.addUserToHouse(houseId, userId);
-            return new ResponseEntity("User was succesfully added to house", HttpStatus.OK);
+            return new ResponseEntity<>("User was successfully added to house", HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);

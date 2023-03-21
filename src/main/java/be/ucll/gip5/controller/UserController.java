@@ -1,7 +1,5 @@
 package be.ucll.gip5.controller;
 
-import be.ucll.gip5.dto.DeviceDTO;
-import be.ucll.gip5.dto.HouseDTO;
 import be.ucll.gip5.dto.UserDTO;
 import be.ucll.gip5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +20,13 @@ public class UserController {
     public ResponseEntity addUser(@RequestBody UserDTO userDTO){
         try {
             userService.addUser(userDTO);
-            return new ResponseEntity("User successfully created", HttpStatus.CREATED);
+            return new ResponseEntity<>("User successfully created", HttpStatus.CREATED);
         }catch (ClassNotFoundException e){
             e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -36,7 +34,7 @@ public class UserController {
     public ResponseEntity editUserById(@PathVariable Long id, @RequestBody UserDTO userDTO){
         try {
             userService.editUser(userDTO, id);
-            return new ResponseEntity("User was successfully edited", HttpStatus.OK);
+            return new ResponseEntity<>("User was successfully edited", HttpStatus.OK);
         }
         catch (ClassNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -51,7 +49,7 @@ public class UserController {
     public  ResponseEntity deleteUserById(@PathVariable Long id){
         try {
             userService.deleteUserById(id);
-            return new ResponseEntity("User was successfully deleted", HttpStatus.OK);
+            return new ResponseEntity<>("User was successfully deleted", HttpStatus.OK);
         }
         catch (ClassNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -102,7 +100,7 @@ public class UserController {
     public ResponseEntity login(@PathVariable String email, @PathVariable String password) throws Exception {
         try {
             userService.userLogin(email, password);
-            return new ResponseEntity("Login succeeded ", HttpStatus.OK);
+            return new ResponseEntity<>("Login succeeded ", HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
         }

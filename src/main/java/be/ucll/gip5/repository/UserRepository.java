@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends CrudRepository<User,Long> {
-    User getAccountByUsername(String username);
     User findAllByUserId(Long id);
     List<User> findAll();
 

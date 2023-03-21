@@ -6,7 +6,6 @@ import be.ucll.gip5.entity.House;
 import be.ucll.gip5.entity.Space;
 import be.ucll.gip5.entity.User;
 import be.ucll.gip5.repository.HouseRepository;
-import be.ucll.gip5.repository.SpaceRepository;
 import be.ucll.gip5.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +18,6 @@ public class HouseService {
 
     @Autowired
     private HouseRepository houseRepository;
-    @Autowired
-    private SpaceRepository spaceRepository;
     @Autowired
     private DTOConverter dtoConverter;
     @Autowired

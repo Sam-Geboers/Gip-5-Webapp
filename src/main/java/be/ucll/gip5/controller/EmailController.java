@@ -49,10 +49,10 @@ public class EmailController {
 
             javaMailSender.send(simpleMailMessage);
 
-            return new ResponseEntity<>("Mail sent succesfully!", HttpStatus.OK);
+            return new ResponseEntity<>("Mail sent successfully!", HttpStatus.OK);
         } catch (MailException e) {
             e.printStackTrace();
-            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
 }
