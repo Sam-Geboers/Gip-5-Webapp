@@ -4,7 +4,6 @@ import be.ucll.gip5.dto.UserDTO;
 import be.ucll.gip5.entity.User;
 import be.ucll.gip5.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,27 +18,25 @@ public class UserService {
     @Autowired
     private DTOConverter dtoConverter;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     public void addUser(UserDTO dto) throws ClassNotFoundException {
-        User user = dtoConverter.UserDTOToEntity(dto);
 
-        if (user.getUsername().trim().length() == 0 || user.getUsername().equals("")) {
+
+        if (dto.getUsername().trim().length() == 0 || dto.getUsername().equals("")) {
             throw new IllegalArgumentException("Username is empty.");
-        } else if (user.getEmail().trim().length() == 0 || user.getEmail().equals("")) {
+        } else if (dto.getEmail().trim().length() == 0 || dto.getEmail().equals("")) {
             throw new IllegalArgumentException("Email is empty.");
-        }else if (user.getPassword().trim().length() == 0 || user.getPassword().equals("")){
+        }else if (dto.getPassword().trim().length() == 0 || dto.getPassword().equals("")){
             throw new IllegalArgumentException("Password is empty.");
-        } else if (userRepository.existsByEmail(user.getEmail())) {
+        } else if (userRepository.existsByEmail(dto.getEmail())) {
             throw new IllegalArgumentException("Email already exists.");
         }
+
+        User user = dtoConverter.UserDTOToEntity(dto);
 
         if (user.getRoles() == null ||
                 !user.getRoles().equals("ADMIN") ||
                 !user.getRoles().equals("USER"))
             user.setRoles("USER");
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
     }
