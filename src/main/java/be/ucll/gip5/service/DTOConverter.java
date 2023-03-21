@@ -15,6 +15,7 @@ public class DTOConverter {
     public DeviceDTO DeviceEntityToDTO(Device device){
         DeviceDTO dto = new DeviceDTO();
         dto.setName(device.getName());
+        dto.setDeviceInfo(DeviceInfoEntityToDTO(device.getDeviceInfo()));
         return dto;
     }
     /***DeviceInfo***/

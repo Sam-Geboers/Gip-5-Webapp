@@ -1,6 +1,7 @@
 package be.ucll.gip5.controller;
 
 import be.ucll.gip5.dto.SpaceDTO;
+import be.ucll.gip5.dto.SpaceWithListDTO;
 import be.ucll.gip5.entity.Device;
 import be.ucll.gip5.service.SpaceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,7 @@ public class SpaceController {
     @GetMapping("/get-spaces")
     public ResponseEntity getAllSpaces(){
         try {
-            List<SpaceDTO> spaceDTOList = spaceService.getAllSpaces();
+            List<SpaceWithListDTO> spaceDTOList = spaceService.getAllSpaces();
             return new ResponseEntity<>(spaceDTOList, HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
@@ -81,7 +82,7 @@ public class SpaceController {
         }
     }
     
-    @GetMapping("/get-devices-from-space")
+    @GetMapping("/get-devices-from-space/{spaceId}")
     public ResponseEntity getDevicesFromSpace(@PathVariable Long spaceId)
     {
         try{

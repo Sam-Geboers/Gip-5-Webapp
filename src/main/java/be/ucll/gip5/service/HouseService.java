@@ -58,6 +58,7 @@ public class HouseService {
         List<HouseWithListDTO> houseDTOS = new ArrayList<>();
         for(House h: houseList){
             HouseWithListDTO house = new HouseWithListDTO();
+            house.setHouseId(h.getHouseId());
             house.setName(h.getName());
             house.setAddress(h.getAddress());
             house.setSpaceList(new ArrayList<>());
