@@ -26,13 +26,13 @@ public class UserService {
         User user = dtoConverter.UserDTOToEntity(dto);
 
         if (user.getUsername().trim().length() == 0 || user.getUsername().equals("")) {
-            throw new ClassNotFoundException("Username is empty.");
+            throw new IllegalArgumentException("Username is empty.");
         } else if (user.getEmail().trim().length() == 0 || user.getEmail().equals("")) {
-            throw new ClassNotFoundException("Email is empty.");
+            throw new IllegalArgumentException("Email is empty.");
         }else if (user.getPassword().trim().length() == 0 || user.getPassword().equals("")){
-            throw new ClassNotFoundException("Password is empty.");
+            throw new IllegalArgumentException("Password is empty.");
         } else if (userRepository.existsByEmail(user.getEmail())) {
-            throw new ClassNotFoundException("Email already exists.");
+            throw new IllegalArgumentException("Email already exists.");
         }
 
         if (user.getRoles() == null ||
