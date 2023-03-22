@@ -78,7 +78,7 @@ public class HouseControllerTest {
         String houseName = "house1";
 
         client.put()
-                .uri("houses/edit/house/1")
+                .uri("houses/edit-house/1")
                 .bodyValue(houseName)
                 .exchange()
                 .expectStatus()

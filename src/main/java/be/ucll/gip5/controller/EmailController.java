@@ -25,8 +25,8 @@ public class EmailController {
     @Autowired
     private EmailConfig emailConfig;
 
-    @PostMapping(value = "/send/{HouseId}")
-    public ResponseEntity sendEmail(@PathVariable Long houseId) {
+    @PostMapping(value = "/send/{id}")
+    public ResponseEntity sendEmail(@PathVariable Long id) {
         try {
             JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
             javaMailSender.setHost(this.emailConfig.getHost());
@@ -35,11 +35,11 @@ public class EmailController {
             javaMailSender.setPassword(this.emailConfig.getPassword());
 
             //list omzetten naar array voor setTo
-            List<User> list = mailService.getEmailsForNewHome(houseId);
+            List<User> list = mailService.getEmailsForNewHome(id);
             String[] array = list.toArray(new String[list.size()]);
 
             //tekst oproepen voor wedstrijd
-            String tekst = mailService.mailTekst(houseId);
+            String tekst = mailService.mailTekst(id);
 
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
             simpleMailMessage.setFrom("teammanager.ucll@gmail.com");

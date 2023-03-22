@@ -1,4 +1,4 @@
-package be.ucll.gip5.security2;
+package be.ucll.gip5.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,8 @@ public class SecurityConfig {
                                                     "/users/**",
                                                     "/houses/**",
                                                     "/devices/**",
-                                                    "/devicesInfo/**"};
+                                                    "/devicesInfo/**",
+                                                    "/mail/**"};
     //endpoints READ (update)
     private static final String[] UNSECURED_URLS = {"/spaces/get-space/{id}",
                                                     "/spaces/get-spaces",
@@ -29,7 +30,7 @@ public class SecurityConfig {
                                                     "/swagger-ui/",
                                                     "/swagger-ui/**",
                                                     "/swagger-resources/**",
-                                                    };
+                                                    "/mail/send/{id}"};
 
     @Bean
     public PasswordEncoder passwordEncoder(){

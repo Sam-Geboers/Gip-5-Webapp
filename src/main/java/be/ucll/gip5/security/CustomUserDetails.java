@@ -1,4 +1,4 @@
-package be.ucll.gip5.security2;
+package be.ucll.gip5.security;
 
 import be.ucll.gip5.entity.User;
 import lombok.Data;
