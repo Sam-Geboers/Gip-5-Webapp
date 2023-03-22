@@ -28,6 +28,10 @@ public class HouseService {
         if (houseRepository.findByName(house.getName()) != null){
             throw new IllegalArgumentException("Name already exists");
         }
+        if (house.getName().equals("") || house.getName().trim().length() == 0)
+            throw new IllegalArgumentException("name is empty");
+        if (house.getAddress().equals("") || house.getAddress().trim().length() == 0)
+            throw new IllegalArgumentException("address is empty");
         houseRepository.save(house);
     }
 
