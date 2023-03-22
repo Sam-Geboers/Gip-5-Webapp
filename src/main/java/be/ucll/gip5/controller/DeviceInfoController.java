@@ -1,7 +1,6 @@
 package be.ucll.gip5.controller;
 
 import be.ucll.gip5.dto.DeviceInfoDTO;
-import be.ucll.gip5.dto.UserDTO;
 import be.ucll.gip5.service.DeviceInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,7 +42,7 @@ public class DeviceInfoController {
         }
     }
 
-    @DeleteMapping("/delete-device-info{id}")
+    @DeleteMapping("/delete-device-info/{id}")
     public  ResponseEntity deleteDeviceInfoById(@PathVariable Long id){
         try {
             deviceInfoService.deleteDeviceInfo(id);
@@ -58,7 +57,7 @@ public class DeviceInfoController {
         }
     }
 
-    @GetMapping("/get-device-info{id}")
+    @GetMapping("/get-device-info/{id}")
     public ResponseEntity getDeviceInfoById(@PathVariable Long id){
         try {
             DeviceInfoDTO deviceInfoDTO = deviceInfoService.getDeviceInfoById(id);

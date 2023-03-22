@@ -43,8 +43,8 @@ public class UserControllerTests {
     @DisplayName("Test should pass if User is successfully created")
     public void addUserSuccessfully(){
         UserBody userBody = new UserBody(
-                "user",
-                "user@mail.com",
+                "user1",
+                "user1@mail.com",
                 "1234",
                 "USER");
 
