@@ -22,11 +22,11 @@ public class SpaceService {
     @Autowired
     private DTOConverter dtoConverter;
 
-    public void addSpace(SpaceDTO dto, Long houseId) throws ClassNotFoundException {
+    public void addSpace(SpaceDTO dto, Long houseId) throws IllegalArgumentException {
         Space space = dtoConverter.SpaceDTOToEntity(dto);
         House house = houseRepository.findAllByHouseId(houseId);
 
-        if (house == null) throw new ClassNotFoundException("House not found.");
+        if (house == null) throw new IllegalArgumentException("House not found.");
 
         space.setHouse(house);
         house.getSpaceList().add(space);

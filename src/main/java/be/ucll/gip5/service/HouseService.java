@@ -23,10 +23,10 @@ public class HouseService {
     @Autowired
     private UserRepository userRepository;
 
-    public void addHouse(HouseDTO houseDTO) throws ClassNotFoundException {
+    public void addHouse(HouseDTO houseDTO) throws IllegalArgumentException {
         House house = dtoConverter.HouseDTOToEntity(houseDTO);
         if (houseRepository.findByName(house.getName()) != null){
-            throw new ClassNotFoundException("Name already exists");
+            throw new IllegalArgumentException("Name already exists");
         }
         houseRepository.save(house);
     }
